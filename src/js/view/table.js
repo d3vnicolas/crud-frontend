@@ -11,7 +11,7 @@ export class Table {
    * @param {String} renderIn Node selector to render table 
    * @param {Array} customerList Array of objects with data table
    */
-  render() {
+  render () {
     let table = document.createElement("table")
     table.classList.add("main-table")
 
@@ -47,9 +47,11 @@ export class Table {
     document.querySelector(this.renderIn).appendChild(table)    
   }
 
-  renderActionsButtons(id) {
+  renderActionsButtons (id) {
     const seeLinkElement = document.createElement("a")
     seeLinkElement.setAttribute("href", "src/pages/customer.html")
+    seeLinkElement.setAttribute("id", id)
+    seeLinkElement.addEventListener("click", (e) => this.saveIdCustomerToShow(e))
     seeLinkElement.classList.add("icon-seemore")
     const seeLinkElementContent = document.createElement("span")
     seeLinkElementContent.innerText = "Ver"
@@ -67,5 +69,9 @@ export class Table {
     tdElement.append(seeLinkElement, deletLinkElement)
 
     return tdElement
+  }
+
+  saveIdCustomerToShow ({ target }) {
+    window.localStorage.setItem("customerToShow", target.id)
   }
 }
