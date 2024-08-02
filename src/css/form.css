@@ -1,0 +1,116 @@
+.see-customer-page fieldset>div {
+  display: flex;
+}
+
+.see-customer-page fieldset label {
+  display: block;
+  font-weight: bold;
+  min-width: 120px;
+}
+
+.header-page {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.header-page.container {
+  box-shadow: none;
+}
+
+.header-page a {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.header-page a span {
+  display: none;
+}
+
+.header-page a::before {
+  background: url("../images/icon-arrow-back.svg") center center no-repeat;
+  background-size: contain;
+  content: "";
+  height: 24px;
+  width: 24px;
+}
+
+.body-page {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 32px auto 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+form fieldset {
+  padding: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group input:focus {
+  outline: none;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 8px 4px 0 4px;
+}
+
+button[type=button] {
+  background-color: #007BFF;
+}
+
+button[type=submit] {
+  background-color: #2ebe4e;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: .7;
+}

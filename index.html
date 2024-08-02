@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta
+      name="description"
+      content="interface crud para gerenciar tabela de clientes"
+    />
+    <meta name="author" content="Jhonathan Kauan" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/css/global.css" />
+
+    <title>crud-frontend</title>
+  </head>
+  <body>
+    <header class="header-page">
+      <div class="container">
+        <h1>Página Inicial</h1>
+      </div>
+    </header>
+    <main class="body-page container">
+      <div class="top-table">
+        <a class="btn-add" href="javascript:void(0);">Adicionar</a>
+        <div class="search-wrapper">
+          <input
+            class="search-bar"
+            type="text"
+            placeholder="Pesquisar cadastro"
+          />
+          <button class="btn-search">Pesquisar</button>
+        </div>
+      </div>
+      <div class="table-wrapper" data-table-main></div>
+    </main>
+  </body>
+  <script type="module" src="./src/js/index.js"></script>
+</html>
