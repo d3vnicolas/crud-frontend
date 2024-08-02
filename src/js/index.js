@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     const allUsers = await getAllCustomers(window.apiUrl+"/clientes")
     const mainTable = new Table("[data-table-main]", allUsers)
+    window.localStorage.setItem("allUsers", JSON.stringify(allUsers))
     mainTable.render()
     ButtonsHandlers.init()
   } catch (error) {
