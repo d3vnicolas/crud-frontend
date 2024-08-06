@@ -1,17 +1,18 @@
-import { getAllCustomers } from "./helper/data-helper.js"
+import HelperFetch from "./helper/data-helper.js"
 import { Table } from "./view/table.js"
 import ButtonsHandlers from "./handlers/home/buttons.js"
+import { init } from "./handlers/home/search.js"
 
-// window.apiUrl = "https://crud-api-bg41.onrender.com"
 window.apiUrl = "http://localhost:3000"
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const allUsers = await getAllCustomers(window.apiUrl+"/clientes")
+    const helperFetch = new HelperFetch(window.apiUrl)
+    const allUsers = await helperFetch.getAllCustomers("/clientes")
     const mainTable = new Table("[data-table-main]", allUsers)
-    window.localStorage.setItem("allUsers", JSON.stringify(allUsers))
     mainTable.render()
     ButtonsHandlers.init()
+    init()
   } catch (error) {
     console.error("Erro:", error)
   }

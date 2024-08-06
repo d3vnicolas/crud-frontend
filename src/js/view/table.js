@@ -16,11 +16,11 @@ export class Table {
     table.classList.add("main-table")
 
     const thead = document.createElement("thead")
-    const tableHeaders = ["Nome", "Sobrenome", "E-mail", "Telefone", "Ações"]
+    const tableHeaders = ["Nome", "E-mail", "Telefone", "Ações"]
     const tbodyElement = document.createElement("tbody")
 
     const trList = this.customerList.map((customer) => {
-      const props = [customer.nome, customer.sobrenome, customer.email, customer.telefone]
+      const props = [customer.nome, customer.email, customer.telefone]
       let trElement = document.createElement("tr")
       props.forEach(prop => {
         let tdElement = document.createElement("td")
