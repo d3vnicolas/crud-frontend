@@ -38,7 +38,7 @@ class HelperFetch {
    *
    * @param {Number} id Customer id to delete from database
    */
-  deletCustomer = async (id) => {
+  deletCustomer = async id => {
     try {
       const response = await fetch(`${this.apiUrl}/cliente/deletar/${id}`, {
         method: "DELETE",
@@ -85,7 +85,7 @@ class HelperFetch {
    * @param {Number} id Customer id to find in database
    * @returns 
    */
-  getUniqueCustomer = async (id) => {
+  getUniqueCustomer = async id => {
     try {
       const response = await fetch(`${this.apiUrl}/cliente/${id}`)
 
@@ -99,6 +99,28 @@ class HelperFetch {
 
       // Retorna os dados recebidos
       return customer
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  addCustomer = async data => {
+    try {
+      const response = await fetch(`${this.apiUrl}/cliente/registrar`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`)
+      }
+
+      alert("Usuário cadastrado com sucesso.")
+
+      return response
     } catch (error) {
       console.log(error)
     }
