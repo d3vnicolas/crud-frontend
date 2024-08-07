@@ -1,3 +1,7 @@
+/**
+ * 
+ * @param {JSON} data Customer data json
+ */
 const fillForm = (data) => {
   const form = document.querySelector("form")
   const inputs = form.querySelectorAll("input[name], select[name]")
