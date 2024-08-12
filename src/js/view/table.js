@@ -1,10 +1,17 @@
 export class Table {
-  renderIn
-  customerList
-  
+  #customerList // Propriedade privada para armazenar a lista de clientes
+
   constructor(renderIn, customerList) {
-    this.renderIn = renderIn, 
-    this.customerList = customerList
+    this.renderIn = renderIn
+    this.customerList = customerList // Usa o setter para definir a lista de clientes
+  }
+
+  get customerList() {
+    return this.#customerList
+  }
+
+  set customerList(customers) {
+    this.#customerList = customers
   }
 
   /**
@@ -44,6 +51,7 @@ export class Table {
       tbodyElement.appendChild(element)
     })
     table.appendChild(tbodyElement)
+    document.querySelector(this.renderIn).innerHTML = ""
     document.querySelector(this.renderIn).appendChild(table)    
   }
 
