@@ -10,7 +10,7 @@ form.addEventListener("submit", async e => {
   }, {})
   
   try {
-    const helperFetch = new HelperFetch("http://localhost:3000")
+    const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
     helperFetch.addCustomer(dataObj).then(() => location.assign("/"))
     
   } catch (error) {

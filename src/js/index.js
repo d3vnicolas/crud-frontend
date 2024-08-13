@@ -2,7 +2,7 @@ import HelperFetch from "./helper/data-helper.js"
 import { Table } from "./view/table.js"
 import ButtonsHandlers from "./handlers/home/buttons.js"
 
-window.apiUrl = "http://localhost:3000"
+window.apiUrl = "https://crud-api-bg41.onrender.com"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const mainTable = new Table("[data-table-main]", [])
