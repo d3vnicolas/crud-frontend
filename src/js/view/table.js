@@ -1,26 +1,33 @@
 export class Table {
-  renderIn
-  customerList
-  
+  #customerList // Propriedade privada para armazenar a lista de clientes
+
   constructor(renderIn, customerList) {
-    this.renderIn = renderIn, 
-    this.customerList = customerList
+    this.renderIn = renderIn
+    this.customerList = customerList // Usa o setter para definir a lista de clientes
+  }
+
+  get customerList() {
+    return this.#customerList
+  }
+
+  set customerList(customers) {
+    this.#customerList = customers
   }
 
   /**
    * @param {String} renderIn Node selector to render table 
    * @param {Array} customerList Array of objects with data table
    */
-  render() {
+  render () {
     let table = document.createElement("table")
     table.classList.add("main-table")
 
     const thead = document.createElement("thead")
-    const tableHeaders = ["Nome", "Sobrenome", "E-mail", "Telefone", "Ações"]
+    const tableHeaders = ["Nome", "E-mail", "Telefone", "Ações"]
     const tbodyElement = document.createElement("tbody")
 
     const trList = this.customerList.map((customer) => {
-      const props = [customer.nome, customer.sobrenome, customer.email, customer.telefone]
+      const props = [customer.nome, customer.email, customer.telefone]
       let trElement = document.createElement("tr")
       props.forEach(prop => {
         let tdElement = document.createElement("td")
@@ -28,7 +35,7 @@ export class Table {
         trElement.appendChild(tdElement)
       })
 
-      trElement.appendChild(this.renderActionsButtons(customer.id))
+      trElement.appendChild(this.renderActionsButtons(customer.id_cliente))
 
       return trElement
     })
@@ -44,12 +51,15 @@ export class Table {
       tbodyElement.appendChild(element)
     })
     table.appendChild(tbodyElement)
+    document.querySelector(this.renderIn).innerHTML = ""
     document.querySelector(this.renderIn).appendChild(table)    
   }
 
-  renderActionsButtons(id) {
+  renderActionsButtons (id) {
     const seeLinkElement = document.createElement("a")
     seeLinkElement.setAttribute("href", "src/pages/customer.html")
+    seeLinkElement.setAttribute("id", id)
+    seeLinkElement.addEventListener("click", (e) => this.saveIdCustomerToShow(e))
     seeLinkElement.classList.add("icon-seemore")
     const seeLinkElementContent = document.createElement("span")
     seeLinkElementContent.innerText = "Ver"
@@ -67,5 +77,9 @@ export class Table {
     tdElement.append(seeLinkElement, deletLinkElement)
 
     return tdElement
+  }
+
+  saveIdCustomerToShow ({ target }) {
+    window.localStorage.setItem("customerToShow", target.id)
   }
 }
