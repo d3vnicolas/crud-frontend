@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const helperFetch = new HelperFetch(window.apiUrl)
     const allUsers = await helperFetch.getAllCustomers("/clientes")
     window.localStorage.setItem("allUsers", JSON.stringify(allUsers.reverse()))
-    mainTable.customerList = allUsers.reverse()
+    mainTable.customerList = allUsers
     mainTable.render()
     ButtonsHandlers.init()
   } catch (error) {
@@ -32,9 +32,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     mainTable.render()
   })
 
-  formSearch.querySelector("input.search-bar").addEventListener("search", (e) => {
-    console.log(e)
-    mainTable.customerList = JSON.parse(window.localStorage.getItem("allUsers"))
-    mainTable.render()
+  formSearch.querySelector("input.search-bar").addEventListener("input", ({ target }) => {
+    if (target.value == "") { 
+      mainTable.customerList = JSON.parse(window.localStorage.getItem("allUsers"))
+      mainTable.render()
+    }
   })
 })
