@@ -5,7 +5,7 @@ import HelperFetch from "./helper/data-helper.js"
 document.addEventListener("DOMContentLoaded", async function () {
   ButtonsHandlers.init()
 
-  const helperFetch = new HelperFetch("http://localhost:3000")
+  const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
   const id = JSON.parse(window.localStorage.getItem("customerToShow"))
   
   // Trazer os dados do cliente no formulário
