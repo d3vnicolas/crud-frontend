@@ -35,7 +35,7 @@ export class Table {
         trElement.appendChild(tdElement)
       })
 
-      trElement.appendChild(this.renderActionsButtons(customer.id))
+      trElement.appendChild(this.renderActionsButtons(customer.id_cliente))
 
       return trElement
     })
