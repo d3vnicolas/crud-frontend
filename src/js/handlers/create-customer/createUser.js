@@ -1,5 +1,8 @@
 import HelperFetch from "../../helper/data-helper.js"
 
+// Defina a URL base
+const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
+
 const form = document.querySelector("[data-form]")
 
 form.addEventListener("submit", async e => {
@@ -9,11 +12,9 @@ form.addEventListener("submit", async e => {
     return obj
   }, {})
   
-  try {
-    const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
-    helperFetch.addCustomer(dataObj).then(() => location.assign("/"))
-    
-  } catch (error) {
-    console.log(error)    
-  }
+  const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
+  helperFetch.addCustomer(dataObj).then(() => {
+    alert("Cliente cadastrado com sucesso.")
+    window.location.assign(BASE_URL)
+  })
 })
