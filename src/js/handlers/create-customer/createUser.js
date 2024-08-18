@@ -22,4 +22,4 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.querySelector("[data-back-page]").addEventListener("click", () => {
     window.location.assign(BASE_URL)
   })
-}
+})
