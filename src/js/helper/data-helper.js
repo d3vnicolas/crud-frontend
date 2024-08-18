@@ -118,9 +118,7 @@ class HelperFetch {
         throw new Error(`HTTP error status: ${response.status}`)
       }
 
-      alert("Usuário cadastrado com sucesso.")
-
-      return response
+      return response.status
     } catch (error) {
       console.log(error)
     }

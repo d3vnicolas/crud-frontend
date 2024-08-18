@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
   const id = JSON.parse(window.localStorage.getItem("customerToShow"))
+  const BASE_URL = window.location.hostname === 'localhost' ? '/' : '/crud-frontend/'
   
   // Trazer os dados do cliente no formulário
   try {
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   } catch {
     alert("Erro ao localizar cliente.")
-    this.location.assign("/")
+    window.location.assign(BASE_URL)
   }
 
   const form = document.querySelector("form")
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
       helperFetch.saveCustomer(dataObj, id).then(async () => {
         alert("Registro atualizado com sucesso.")
-        this.location.reload()
+        window.location.reload()
       })
     } catch (error) {
       alert(error)

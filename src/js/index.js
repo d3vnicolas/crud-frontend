@@ -30,12 +30,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     const usersSearch = users.filter(user => user.nome.toLowerCase().includes(searchTerm))
     mainTable.customerList = usersSearch
     mainTable.render()
+    ButtonsHandlers.init()
   })
 
   formSearch.querySelector("input.search-bar").addEventListener("input", ({ target }) => {
     if (target.value == "") { 
       mainTable.customerList = JSON.parse(window.localStorage.getItem("allUsers"))
       mainTable.render()
+      ButtonsHandlers.init()
     }
   })
 })
