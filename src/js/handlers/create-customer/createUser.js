@@ -18,3 +18,7 @@ form.addEventListener("submit", async e => {
     window.location.assign(BASE_URL)
   })
 })
+
+document.querySelector("[data-back-page]").addEventListener("click", () => {
+  window.location.assign(BASE_URL)
+})
