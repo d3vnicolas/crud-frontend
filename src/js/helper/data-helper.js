@@ -75,6 +75,8 @@ class HelperFetch {
       if (!response.ok) {
         throw new Error(`HTTP error status: ${response.status}`)
       }
+
+      return response.status
     } catch (error) {
       return `HTTP error status: ${error}`
     }
