@@ -1,6 +1,7 @@
 import ButtonsHandlers from "./handlers/customer/buttons.js"
 import fillForm from "./handlers/customer/form.js"
 import HelperFetch from "./helper/data-helper.js"
+import { Spinner } from "./view/loading-spinner.js"
 
 document.addEventListener("DOMContentLoaded", async function () {
   ButtonsHandlers.init()
@@ -11,7 +12,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   
   // Trazer os dados do cliente no formulário
   try {
-    const customerToShow = await helperFetch.getUniqueCustomer(id)
+    const loading = new Spinner
+    loading.show()
+    const customerToShow = await helperFetch.getUniqueCustomer(id).finally(() => loading.destroy())
     fillForm(customerToShow)
 
   } catch {
@@ -30,9 +33,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     }, {})
 
     try {
-      helperFetch.saveCustomer(dataObj, id).then(async () => {
-        alert("Registro atualizado com sucesso.")
-        window.location.reload()
+      helperFetch.saveCustomer(dataObj, id).then(async (response) => {
+        if (response == 200) {
+          alert("Usuário atualizado com sucesso.")
+          window.location.reload()
+        } else {
+          alert("Não foi possível concluir a operações, tente novamente mais tarde. \n Erro: "+response)
+        }
       })
     } catch (error) {
       alert(error)

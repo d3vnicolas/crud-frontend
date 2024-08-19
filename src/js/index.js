@@ -1,14 +1,17 @@
 import HelperFetch from "./helper/data-helper.js"
 import { Table } from "./view/table.js"
 import ButtonsHandlers from "./handlers/home/buttons.js"
+import { Spinner } from "./view/loading-spinner.js"
 
 window.apiUrl = "https://crud-api-bg41.onrender.com"
 
 document.addEventListener("DOMContentLoaded", async function () {
   const mainTable = new Table("[data-table-main]", [])
   try {
+    const loading = new Spinner
+    loading.show()
     const helperFetch = new HelperFetch(window.apiUrl)
-    const allUsers = await helperFetch.getAllCustomers("/clientes")
+    const allUsers = await helperFetch.getAllCustomers("/clientes").finally(() => loading.destroy())
     window.localStorage.setItem("allUsers", JSON.stringify(allUsers.reverse()))
     mainTable.customerList = allUsers
     mainTable.render()
