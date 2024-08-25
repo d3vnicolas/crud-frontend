@@ -1,3 +1,7 @@
+import { Modal } from "../view/modal.js"
+
+const modal = new Modal()
+
 class HelperFetch {
   apiUrl
 
@@ -30,7 +34,7 @@ class HelperFetch {
       return data
     } catch (error) {
       // Captura e exibe qualquer erro que ocorra durante a solicitação
-      console.error("Error fetching data:", error)
+      modal.alert("Algo deu errado", "Error fetching data: "+error, () => modal.close())
     }
   }
 
@@ -51,10 +55,9 @@ class HelperFetch {
         throw new Error(`HTTP error status: ${response.status}`)
       }
 
-      alert("Registro deletado com sucesso.")
-      location.reload()
+      modal.alert("Concluído","Registro deletado com sucesso.", () => location.reload())
     } catch (error) {
-      console.error("Error delete data:", error)
+      modal.alert("Algo deu errado","Error delete data: "+error, () => modal.close())
     }
   }
 
@@ -102,7 +105,7 @@ class HelperFetch {
       // Retorna os dados recebidos
       return customer
     } catch (error) {
-      console.log(error)
+      modal.alert("Algo deu errado", error, () => modal.close())
     }
   }
 
@@ -122,7 +125,7 @@ class HelperFetch {
 
       return response.status
     } catch (error) {
-      console.log(error)
+      modal.close("Algo deu errado", error, () => modal.close())
     }
   }
 }

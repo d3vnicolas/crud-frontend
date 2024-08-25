@@ -2,8 +2,10 @@ import HelperFetch from "./helper/data-helper.js"
 import { Table } from "./view/table.js"
 import ButtonsHandlers from "./handlers/home/buttons.js"
 import { Spinner } from "./view/loading-spinner.js"
+import { Modal } from "./view/modal.js"
 
 window.apiUrl = "https://crud-api-bg41.onrender.com"
+const modal = new Modal()
 
 document.addEventListener("DOMContentLoaded", async function () {
   const mainTable = new Table("[data-table-main]", [])
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     mainTable.render()
     ButtonsHandlers.init()
   } catch (error) {
-    console.error("Erro:", error)
+    modal.alert("Algo deu errado", "Erro: "+error, () => modal.close())
   }
 
   const formSearch = document.querySelector("form[data-search-form]")
