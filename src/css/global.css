@@ -168,3 +168,50 @@ body {
 .main-table tbody tr:nth-child(2n+1) {
   background-color: #ececec;
 }
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 50%;
+  padding: 16px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  p {
+    margin: 24px 0;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: white;
+  }
+
+  .buttons__wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, .4);
+  content: '';
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
