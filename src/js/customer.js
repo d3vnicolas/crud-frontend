@@ -7,7 +7,7 @@ import { Modal } from "./view/modal.js"
 document.addEventListener("DOMContentLoaded", async function () {
   ButtonsHandlers.init()
 
-  const helperFetch = new HelperFetch("http://localhost:3000")
+  const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
   const id = JSON.parse(window.localStorage.getItem("customerToShow"))
   const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
   const modal = new Modal()
