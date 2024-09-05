@@ -7,16 +7,22 @@ import { Modal } from "./view/modal.js"
 document.addEventListener("DOMContentLoaded", async function () {
   ButtonsHandlers.init()
 
-  const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
+  const helperFetch = new HelperFetch("http://localhost:3000")
   const id = JSON.parse(window.localStorage.getItem("customerToShow"))
   const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
   const modal = new Modal()
+  const loading = new Spinner
   
   // Trazer os dados do cliente no formulário
   try {
-    const loading = new Spinner
     loading.show()
-    const customerToShow = await helperFetch.getUniqueCustomer(id).finally(() => loading.destroy())
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      this.location.replace("/src/pages/login.html")
+    }
+
+    const customerToShow = await helperFetch.getUniqueCustomer(id, token).finally(() => loading.destroy())
     fillForm(customerToShow)
 
   } catch {
@@ -35,7 +41,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     }, {})
 
     try {
-      helperFetch.saveCustomer(dataObj, id).then(async (response) => {
+      const token = localStorage.getItem("token")
+
+      if (!token) {
+        this.location.replace("/src/pages/login.html")
+      }
+
+      helperFetch.saveCustomer(dataObj, id, token).then(async (response) => {
         if (response == 200) {
           modal.alert("Concluído","Usuário atualizado com sucesso.", () => window.location.reload())
         } else {
