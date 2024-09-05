@@ -16,7 +16,13 @@ const AddDeleteEvent = () => {
       const proceed = await modal.confirm("", `Deseja realmente deletar este registro?`)
       if (proceed) {
         try {
-          await helperFetch.deletCustomer(id)
+          const token = localStorage.getItem("token")
+
+          if (!token) {
+            this.location.replace("/src/pages/login.html")
+          }
+
+          await helperFetch.deletCustomer(id, token)
         } catch (error) {
           modal.alert("Algo deu errado", "Erro: "+error, () => modal.close())
         }

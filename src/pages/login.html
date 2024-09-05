@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="description" content="interface crud para gerenciar tabela de clientes" />
+    <meta name="author" content="Jhonathan Kauan" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <title>Crud de clientes</title>
+</head>
+
+<body class="see-customer-page">
+    <header class="header-page">
+        <div class="header-page container">
+            <h1>Crud de clientes</h1>
+        </div>
+    </header>
+    <main class="body-page">
+        <form data-form-login>
+            <fieldset>
+                <legend>Login</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Nome de usuário:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit">Entrar</button>
+        </form>
+    </main>
+</body>
+<script type="module" src="../js/login.js"></script>
+</html>

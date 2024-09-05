@@ -17,8 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const loading = new Spinner
     loading.show()
-    const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
-    helperFetch.addCustomer(dataObj).then((result) => {
+    const helperFetch = new HelperFetch("http://localhost:3000")
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      this.location.replace("/src/pages/login.html")
+    }
+
+    helperFetch.addCustomer(dataObj, token).then((result) => {
       if (result == 201) {
         loading.destroy()
         modal.alert("Concluído","Cliente cadastrado com sucesso.", () => window.location.assign(BASE_URL))
