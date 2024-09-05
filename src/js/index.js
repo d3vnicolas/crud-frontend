@@ -4,22 +4,29 @@ import ButtonsHandlers from "./handlers/home/buttons.js"
 import { Spinner } from "./view/loading-spinner.js"
 import { Modal } from "./view/modal.js"
 
-window.apiUrl = "https://crud-api-bg41.onrender.com"
+window.apiUrl = "http://localhost:3000"
 const modal = new Modal()
+const loading = new Spinner
 
 document.addEventListener("DOMContentLoaded", async function () {
   const mainTable = new Table("[data-table-main]", [])
   try {
-    const loading = new Spinner
     loading.show()
     const helperFetch = new HelperFetch(window.apiUrl)
-    const allUsers = await helperFetch.getAllCustomers("/clientes").finally(() => loading.destroy())
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      this.location.replace("/src/pages/login.html")
+    }
+    
+    const allUsers = await helperFetch.getAllCustomers(token).finally(() => loading.destroy())
+    
     window.localStorage.setItem("allUsers", JSON.stringify(allUsers.reverse()))
     mainTable.customerList = allUsers
     mainTable.render()
     ButtonsHandlers.init()
   } catch (error) {
-    modal.alert("Algo deu errado", "Erro: "+error, () => modal.close())
+    modal.alert("Algo deu errado", error, () => modal.close())
   }
 
   const formSearch = document.querySelector("form[data-search-form]")

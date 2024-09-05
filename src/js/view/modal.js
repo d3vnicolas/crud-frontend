@@ -18,6 +18,7 @@ export class Modal {
 
         document.body.insertBefore(modal, document.body.firstChild)
         document.body.insertBefore(overlay, modal)
+        buttonClose.focus()
     }
 
     confirm(title, content) {
@@ -58,6 +59,7 @@ export class Modal {
 
             document.body.insertBefore(modal, document.body.firstChild);
             document.body.insertBefore(overlay, modal);
+            buttonNot.focus()
         });
     }
 

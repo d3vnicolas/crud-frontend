@@ -19,17 +19,21 @@
   padding: 0;
 }
 
-.header-page a {
+.header-page.container h1 {
+  margin-right: auto;
+}
+
+.header-page a.back-page {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.header-page a span {
+.header-page a.back-page span {
   display: none;
 }
 
-.header-page a::before {
+.header-page a.back-page::before {
   background: url("../images/icon-arrow-back.svg") center center no-repeat;
   background-size: contain;
   content: "";

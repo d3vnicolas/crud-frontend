@@ -68,6 +68,12 @@ body {
   width: 100%;
 }
 
+.container.d-flex {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
 .body-page {
   background-color: #fff;
   border-radius: 6px;

@@ -17,24 +17,30 @@ class HelperFetch {
    * 
    * @returns Data json
    */
-  getAllCustomers = async () => {
+  getAllCustomers = async (token) => {
     try {
       // Envia uma solicitação GET para a URL fornecida
-      const response = await fetch(this.apiUrl + "/clientes")
+      const response = await fetch(this.apiUrl + "/admin/clientes", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-type": "application/json"
+        }
+      })
 
-      // Verifica se a resposta foi bem-sucedida (status 200-299)
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`)
+      if (response.status === 401) {
+        location.replace("/src/pages/login.html")
       }
 
-      // Converte a resposta para JSON
-      const data = await response.json()
-
+      const result = await response.json()
       // Retorna os dados recebidos
-      return data
+      return result
     } catch (error) {
       // Captura e exibe qualquer erro que ocorra durante a solicitação
-      modal.alert("Algo deu errado", "Error fetching data: "+error, () => modal.close())
+      modal.alert("Algo deu errado", error, () => {
+        modal.close()
+        location.replace("/src/pages/login.html")
+      })
     }
   }
 
@@ -42,22 +48,23 @@ class HelperFetch {
    *
    * @param {Number} id Customer id to delete from database
    */
-  deletCustomer = async id => {
+  deletCustomer = async (id, token) => {
     try {
-      const response = await fetch(`${this.apiUrl}/cliente/deletar/${id}`, {
+      const response = await fetch(`${this.apiUrl}/admin/cliente/deletar/${id}`, {
         method: "DELETE",
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-type": "application/json",
         },
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`)
+      if (response.status === 401) {
+        location.replace("/src/pages/login.html")
       }
 
-      modal.alert("Concluído","Registro deletado com sucesso.", () => location.reload())
+      modal.alert("Concluído", "Registro deletado com sucesso.", () => location.reload())
     } catch (error) {
-      modal.alert("Algo deu errado","Error delete data: "+error, () => modal.close())
+      modal.alert("Algo deu errado", "Error delete data: " + error, () => modal.close())
     }
   }
 
@@ -65,18 +72,19 @@ class HelperFetch {
    *
    * @param {JSON} data
    */
-  saveCustomer = async (data, id) => {
+  saveCustomer = async (data, id, token) => {
     try {
-      const response = await fetch(`${this.apiUrl}/cliente/atualizar/${id}`, {
+      const response = await fetch(`${this.apiUrl}/admin/cliente/atualizar/${id}`, {
         method: "PATCH",
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify(data),
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`)
+      if (response.status === 401) {
+        location.replace("/src/pages/login.html")
       }
 
       return response.status
@@ -90,13 +98,18 @@ class HelperFetch {
    * @param {Number} id Customer id to find in database
    * @returns 
    */
-  getUniqueCustomer = async id => {
+  getUniqueCustomer = async (id, token) => {
     try {
-      const response = await fetch(`${this.apiUrl}/cliente/${id}`)
+      const response = await fetch(`${this.apiUrl}/admin/cliente/${id}`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-type": "application/json",
+        },
+      })
 
-      // Verifica se a resposta foi bem-sucedida (status 200-299)
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`)
+      if (response.status === 401) {
+        location.replace("/src/pages/login.html")
       }
 
       // Converte a resposta para JSON
@@ -109,21 +122,39 @@ class HelperFetch {
     }
   }
 
-  addCustomer = async data => {
+  addCustomer = async (data, token) => {
     try {
-      const response = await fetch(`${this.apiUrl}/cliente/registrar`, {
+      const response = await fetch(`${this.apiUrl}/admin/cliente/registrar`, {
         method: "PUT",
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify(data),
       })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`)
+      if (response.status === 401) {
+        location.replace("/src/pages/login.html")
       }
 
       return response.status
+    } catch (error) {
+      modal.close("Algo deu errado", error, () => modal.close())
+    }
+  }
+
+  doLogin = async data => {
+    try {
+      const response = await fetch(`${this.apiUrl}/login-admin`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      const result = await response.json();
+
+      return result
     } catch (error) {
       modal.close("Algo deu errado", error, () => modal.close())
     }
