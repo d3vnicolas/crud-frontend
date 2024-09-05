@@ -1,6 +1,7 @@
 import { Modal } from "../view/modal.js"
 
 const modal = new Modal()
+const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
 
 class HelperFetch {
   apiUrl
@@ -29,7 +30,7 @@ class HelperFetch {
       })
 
       if (response.status === 401) {
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       }
 
       const result = await response.json()
@@ -39,7 +40,7 @@ class HelperFetch {
       // Captura e exibe qualquer erro que ocorra durante a solicitação
       modal.alert("Algo deu errado", error, () => {
         modal.close()
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       })
     }
   }
@@ -59,7 +60,7 @@ class HelperFetch {
       })
 
       if (response.status === 401) {
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       }
 
       modal.alert("Concluído", "Registro deletado com sucesso.", () => location.reload())
@@ -84,7 +85,7 @@ class HelperFetch {
       })
 
       if (response.status === 401) {
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       }
 
       return response.status
@@ -109,7 +110,7 @@ class HelperFetch {
       })
 
       if (response.status === 401) {
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       }
 
       // Converte a resposta para JSON
@@ -134,7 +135,7 @@ class HelperFetch {
       })
 
       if (response.status === 401) {
-        location.replace("/src/pages/login.html")
+        location.replace(BASE_URL+"src/pages/login.html")
       }
 
       return response.status
@@ -152,7 +153,7 @@ class HelperFetch {
         },
         body: JSON.stringify(data)
       })
-      const result = await response.json();
+      const result = await response.json()
 
       return result
     } catch (error) {

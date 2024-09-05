@@ -9,6 +9,7 @@ const modal = new Modal()
 const loading = new Spinner
 
 document.addEventListener("DOMContentLoaded", async function () {
+  const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
   const mainTable = new Table("[data-table-main]", [])
   try {
     loading.show()
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const token = localStorage.getItem("token")
 
     if (!token) {
-      this.location.replace("/src/pages/login.html")
+      this.location.replace(BASE_URL+"src/pages/login.html")
     }
     
     const allUsers = await helperFetch.getAllCustomers(token).finally(() => loading.destroy())
