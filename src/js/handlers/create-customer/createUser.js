@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const loading = new Spinner
     loading.show()
-    const helperFetch = new HelperFetch("http://localhost:3000")
+    const helperFetch = new HelperFetch("https://crud-api-bg41.onrender.com")
     const token = localStorage.getItem("token")
 
     if (!token) {

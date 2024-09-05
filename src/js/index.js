@@ -4,7 +4,7 @@ import ButtonsHandlers from "./handlers/home/buttons.js"
 import { Spinner } from "./view/loading-spinner.js"
 import { Modal } from "./view/modal.js"
 
-window.apiUrl = "http://localhost:3000"
+window.apiUrl = "https://crud-api-bg41.onrender.com"
 const modal = new Modal()
 const loading = new Spinner
 

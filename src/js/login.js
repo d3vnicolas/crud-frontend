@@ -4,7 +4,7 @@ import { Modal } from "./view/modal.js"
 document.addEventListener("DOMContentLoaded", async function () {
     const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
     const formLogin = document.querySelector('form[data-form-login]')
-    const helper = new HelperFetch("http://localhost:3000")
+    const helper = new HelperFetch("https://crud-api-bg41.onrender.com")
     const modal = new Modal()
 
     formLogin.addEventListener('submit', async e => {
