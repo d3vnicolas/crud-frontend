@@ -8,6 +8,7 @@ const init = () => {
 
 
 const AddDeleteEvent = () => {
+  const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/' : '/crud-frontend/'
   const helperFetch = new HelperFetch(window.apiUrl)
   const allButtons = document.querySelectorAll("[data-trigger]")
   allButtons.forEach(button => {
@@ -19,7 +20,7 @@ const AddDeleteEvent = () => {
           const token = localStorage.getItem("token")
 
           if (!token) {
-            this.location.replace("/src/pages/login.html")
+            this.location.replace(BASE_URL+"src/pages/login.html")
           }
 
           await helperFetch.deletCustomer(id, token)

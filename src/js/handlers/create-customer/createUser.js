@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem("token")
 
     if (!token) {
-      this.location.replace("/src/pages/login.html")
+      this.location.replace(BASE_URL+"src/pages/login.html")
     }
 
     helperFetch.addCustomer(dataObj, token).then((result) => {

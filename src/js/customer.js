@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const token = localStorage.getItem("token")
 
     if (!token) {
-      this.location.replace("/src/pages/login.html")
+      this.location.replace(BASE_URL+"src/pages/login.html")
     }
 
     const customerToShow = await helperFetch.getUniqueCustomer(id, token).finally(() => loading.destroy())
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const token = localStorage.getItem("token")
 
       if (!token) {
-        this.location.replace("/src/pages/login.html")
+        this.location.replace(BASE_URL+"src/pages/login.html")
       }
 
       helperFetch.saveCustomer(dataObj, id, token).then(async (response) => {
