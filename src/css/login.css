@@ -1,9 +1,0 @@
-@import url('./form.css');
-
-form {
-    max-width: 400px;
-    
-    button {
-        margin-top: 12px;
-    }
-} 
