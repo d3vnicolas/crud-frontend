@@ -1,21 +1,21 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/context/ThemeProvider";
-import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google"
+import { ThemeProvider } from "@/context/ThemeProvider"
+import "./globals.css"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 export const metadata = {
   title: "App crud de clientes",
   description: "Crud de clientes com fins didáticos",
-};
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -32,5 +32,5 @@ export default function RootLayout({ children }) {
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

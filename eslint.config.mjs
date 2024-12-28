@@ -9,6 +9,21 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),
+  {
+    files: ["**/*.jsx", "**/*.js"], // Alvo para arquivos JSX e JS
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: "latest", // Suporte à última versão do ECMAScript
+        sourceType: "module", // Habilita `import/export`
+        jsx: true, // Habilita JSX
+      },
+    },
+    rules: {
+      semi: ["error", "never"], // Regra para evitar ponto e vírgula
+    },
+  },
+];
 
 export default eslintConfig;

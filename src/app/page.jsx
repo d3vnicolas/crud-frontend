@@ -1,14 +1,15 @@
-import FormLogin from "@/components/FormLogin";
-import Header from "@/components/Header";
-import { ModeToggle } from "@/components/ModeToggle";
+import { CarouselPlugin } from "@/components/CarouselMain"
+import FormLogin from "@/components/FormLogin"
+import { ModeToggle } from "@/components/ModeToggle"
 
 export default function Home() {
   return (
     <>
-      <ModeToggle className="fixed bottom-4 right-4" />
-      <main className="flex justify-center items-center h-screen">
+      <CarouselPlugin />
+      <ModeToggle className="fixed bottom-4 right-4 z-10" />
+      <main className="z-1 relative flex h-screen items-center justify-center">
         <FormLogin />
       </main>
     </>
-  );
+  )
 }
