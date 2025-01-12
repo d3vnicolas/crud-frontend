@@ -1,7 +1,6 @@
 "use client"
 
-import { FormEvent } from "react"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { LogIn } from "lucide-react"
@@ -13,8 +12,12 @@ import {
   CardTitle,
   
 } from "@/components/ui/card"
+import { useAuth } from "@/context/AuthProvider"
 
 export default function FormLogin() {
+  const { login } = useAuth()
+  const router = useRouter()
+
   const handleSubmit = async event => {
     event.preventDefault()
 
@@ -22,24 +25,12 @@ export default function FormLogin() {
     const email = formData.get("email")
     const password = formData.get("password")
 
-    const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL+"/clientes", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM2NjQ1NjcyLCJleHAiOjE3MzY2NDYyNzJ9.3Ri8IhRkIQxWcd6cX0LEP9LlHPlA3Z7yaz9CcH4w4Os"
-      },
-      // body: JSON.stringify({ email }),
-    })
-
-    if (response.ok) {
-      // const { token } = await response.json()
-      // localStorage.setItem("token", token)
-      // alert(token)
-      const response = await response.json()
-      return response
-    } else {
-      console.error("Login failed")
-    }    
+    try {
+      await login(email, password)
+    } catch (error) {
+      // todo: alert component
+      console.error("Erro ao fazer login:", error)
+    }  
   }
   
   return (
