@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { LogIn } from "lucide-react"
@@ -15,10 +14,10 @@ import {
 import { useAuth } from "@/context/AuthProvider"
 
 export default function FormLogin() {
-  const { login } = useAuth()
-  const router = useRouter()
+  const { login, loading, setLoading } = useAuth()
 
   const handleSubmit = async event => {
+    setLoading(true)
     event.preventDefault()
 
     const formData = new FormData(event.target)
@@ -30,7 +29,8 @@ export default function FormLogin() {
     } catch (error) {
       // todo: alert component
       console.error("Erro ao fazer login:", error)
-    }  
+    }
+    setLoading(false)  
   }
   
   return (
@@ -53,6 +53,7 @@ export default function FormLogin() {
               id="email"
               placeholder="E-mail"
               required
+              disabled={loading}
             />
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -63,13 +64,15 @@ export default function FormLogin() {
               name="password"
               placeholder="Senha"
               required
+              disabled={loading}
             />
           </div>
           <Button
             type="submit"
             className="bg-lime-500 font-medium text-white hover:bg-lime-600"
+            disabled={loading}
           >
-            Entrar <LogIn />
+            {!loading ? 'Entrar' : 'Entrando'} <LogIn />
           </Button>
         </form>
       </CardContent>

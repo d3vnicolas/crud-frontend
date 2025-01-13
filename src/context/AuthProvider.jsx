@@ -4,8 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
   loginService,
-  logoutService,
-  getUser,
+  logoutService
 } from "@/services/auth"
 
 const AuthContext = createContext()
@@ -42,13 +41,13 @@ export const AuthProvider = ({ children }) => {
 
   // Função de logout
   const logout = () => {
-    logoutService() // Remove token do localStorage
+    localStorage.removeItem("authToken") // Remove token do localStorage
     setUser(null) // Reseta o estado do usuário
     router.push("/") // Redireciona para a página de login
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, setLoading }}>
       {children}
     </AuthContext.Provider>
   )

@@ -15,7 +15,7 @@ export const loginService = async (email, password) => {
     }
   } catch (error) {
     // Retorna um erro mais descritivo, caso `error.response` não exista
-    throw error.response?.data || {
+    throw error.response?.data?.message || {
       message: "Erro inesperado. Por favor, tente novamente."
     }
   }
@@ -29,10 +29,4 @@ export const getUserService = async (id, token) => {
   })
 
   return response.data
-}
-
-export const logoutService = async () => {
-  // Remove o token armazenado no localStorage
-  localStorage.removeItem("authToken")
-  
 }
