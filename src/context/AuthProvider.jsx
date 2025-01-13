@@ -3,8 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
-  loginService,
-  logoutService
+  loginService
 } from "@/services/auth"
 
 const AuthContext = createContext()
@@ -18,9 +17,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const initAuth = async () => {
       const token = localStorage.getItem("authToken")
-      if (!token) {
+      const user = JSON.parse(localStorage.getItem("authUser"))
+
+      if (!token || !user) {
         logout() // Remove token inválido
       }
+
+      setUser(user) // Atualiza o estado do usuário
+      
       setLoading(false) // Fim do carregamento
     }
 
@@ -32,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const { token, user } = await loginService(email, password)
       localStorage.setItem("authToken", token) // Salva o token no localStorage
+      localStorage.setItem("authUser", JSON.stringify(user)) // Atualiza o estado do usuário
       setUser(user) // Atualiza o estado do usuário
       router.push("/dashboard") // Redireciona para o dashboard
     } catch (error) {
@@ -42,6 +47,7 @@ export const AuthProvider = ({ children }) => {
   // Função de logout
   const logout = () => {
     localStorage.removeItem("authToken") // Remove token do localStorage
+    localStorage.removeItem("authUser") // Remove usuário do localStorage
     setUser(null) // Reseta o estado do usuário
     router.push("/") // Redireciona para a página de login
   }

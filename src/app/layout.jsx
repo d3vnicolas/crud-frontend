@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/context/ThemeProvider"
 import "./globals.css"
 import { AuthProvider } from "@/context/AuthProvider"
 import { ModeToggle } from "@/components/ModeToggle"
+import { CarouselPlugin } from "@/components/CarouselMain"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange={false}
           >
             {children}
+            <CarouselPlugin />
             <ModeToggle className="fixed bottom-4 right-4 z-10 bg-background border-2 outline-none" />
           </ThemeProvider>
         </body>
